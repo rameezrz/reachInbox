@@ -1,0 +1,36 @@
+{
+  "name": "reachinbox",
+  "version": "1.0.0",
+  "description": "A revolutionary AI-driven platform transforming cold outreach.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rameezrz/reachInbox.git"
+  },
+  "author": "Muhammed Rameez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rameezrz/reachInbox/issues"
+  },
+  "homepage": "https://github.com/rameezrz/reachInbox#readme",
+  "dependencies": {
+    "@prisma/client": "^5.16.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "googleapis": "^140.0.1",
+    "prisma": "^5.16.0"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.14.9",
+    "nodemon": "^3.1.4",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.5.2"
+  }
+}
