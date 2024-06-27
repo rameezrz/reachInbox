@@ -6,7 +6,11 @@ import {
 } from "../services/microsoftService";
 import { errorHandler } from "../utils/errorHandler";
 import { findUser, register, updateTokens } from "../db";
-import { registerUser, updateTokensForUser } from "../utils/googleAuthHelper";
+import {
+  fetchOutlookEmails,
+  sendOutlookEmail,
+} from "../services/outlookService";
+import { analyzeEmailContent } from "../services/openAIService";
 
 export const microsoftAuth = async (req: Request, res: Response) => {
   try {
@@ -20,14 +24,38 @@ export const microsoftAuth = async (req: Request, res: Response) => {
 export const msAuthCallback = async (req: Request, res: Response) => {
   try {
     const code = req.query.code as string;
-    const accessToken = await getMSAccessToken(code);
-    const email = await getMSUserEmail(accessToken || "");
-
+    const tokens = await getMSAccessToken(code);
+    const email = await getMSUserEmail(tokens?.accessToken || "");
+    console.log({ email });
     let user = await findUser(email || "");
     if (!user) {
-      user = await register(email || "", "microsoft", accessToken || "");
+      user = await register(
+        email || "",
+        "microsoft",
+        tokens?.accessToken,
+        tokens?.refreshToken
+      );
     } else {
-      user = await updateTokens(email || "", accessToken || "");
+      user = await updateTokens(
+        email || "",
+        tokens?.accessToken,
+        tokens?.refreshToken
+      );
+    }
+    console.log("registration completed");
+    const emails = await fetchOutlookEmails(tokens?.accessToken);
+    console.log("after fetch");
+    for (const email of emails) {
+      const response = await analyzeEmailContent(
+        email.subject,
+        email.snippet,
+        email.msgBody
+      );
+      email.category = response;
+      console.log(`Msg Analyzed....`);
+      const sentResponse = await sendOutlookEmail(tokens?.accessToken, email);
+      console.log(sentResponse);
+      console.log(`Msg sent....`);
     }
 
     res.status(200).json({ message: "MS OAuth Successfull" });

@@ -13,7 +13,7 @@ export const CATEGORIES = [
   },
 ];
 
-export const LABELS = [
+export const GMAIL_LABELS = [
   {
     name: "Interested",
     color: { backgroundColor: "#c9daf8", textColor: "#3c78d8" }, // light blue background with darker blue text
@@ -25,5 +25,17 @@ export const LABELS = [
   {
     name: "More Information",
     color: { backgroundColor: "#a0eac9", textColor: "#16a765" }, // light green background with darker green text
+  },
+];
+
+export const OUTLOOK_LABELS = [
+  {
+    name: "Interested",
+  },
+  {
+    name: "Not Interested",
+  },
+  {
+    name: "More Information",
   },
 ];

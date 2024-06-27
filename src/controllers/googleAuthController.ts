@@ -10,7 +10,7 @@ import { registerUser, updateTokensForUser } from "../utils/googleAuthHelper";
 import { oAuth2Client } from "../config/googleClient";
 import { google } from "googleapis";
 import { createLabelsIfNotExist } from "../services/gmailService";
-import { LABELS } from "../constants";
+import { GMAIL_LABELS } from "../constants";
 
 export const googleAuth = (req: Request, res: Response) => {
   try {
@@ -44,7 +44,7 @@ export const googleAuthCallback = async (req: Request, res: Response) => {
     });
     const gmail = google.gmail({ version: "v1", auth: oAuth2Client });
 
-    const labelIds = await createLabelsIfNotExist(gmail, "me", LABELS);
+    const labelIds = await createLabelsIfNotExist(gmail, "me", GMAIL_LABELS);
 
     res.status(200).send("Google OAuth successful");
   } catch (error) {

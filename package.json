@@ -19,6 +19,7 @@
   "homepage": "https://github.com/rameezrz/reachInbox#readme",
   "dependencies": {
     "@azure/msal-node": "^2.9.2",
+    "@microsoft/microsoft-graph-client": "^3.0.7",
     "@prisma/client": "^5.16.0",
     "axios": "^1.7.2",
     "bullmq": "^5.8.2",

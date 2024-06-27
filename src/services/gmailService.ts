@@ -9,7 +9,7 @@ import {
   createLabel,
   fetchExistingLabels,
   getLabelIds,
-} from "../utils/labelsHelper";
+} from "../utils/gmailLabels";
 import { Label, mailDetails } from "../Types/gmail";
 
 export const fetchEmails = async (userId: number) => {
@@ -68,13 +68,10 @@ export const modifyMessageLabels = async (
   addLabelNames: string[]
 ): Promise<void> => {
   try {
-    // Fetch existing labels to get their IDs
     const labelMap = await fetchExistingLabels(gmail);
 
-    // Get label IDs to add and remove
     const addLabelIds = getLabelIds(addLabelNames, labelMap);
 
-    // Modify message labels
     await gmail.users.messages.modify({
       userId: "me",
       id: messageId,
