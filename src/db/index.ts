@@ -4,10 +4,10 @@ export const register = async (
   email: string,
   provider: string,
   access_token: string,
-  refresh_token: string
+  refresh_token?: string
 ) => {
   const user = await prisma.user.create({
-    data: { email, provider, access_token, refresh_token },
+    data: { email, provider, access_token, refresh_token: refresh_token || "" },
   });
   return user;
 };
@@ -15,11 +15,11 @@ export const register = async (
 export const updateTokens = async (
   email: string,
   access_token: string,
-  refresh_token: string
+  refresh_token?: string
 ) => {
   const user = await prisma.user.update({
     where: { email },
-    data: { access_token, refresh_token },
+    data: { access_token, refresh_token: refresh_token || "" },
   });
   return user;
 };

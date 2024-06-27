@@ -6,7 +6,7 @@ import { fetchAndProcessEmails } from "../utils/googleAuthHelper";
 import { QueueEvents, Worker } from "bullmq";
 
 export const scheduleEmailFetching = async () => {
-  emailQueue.add("fetchEmails", {}, { repeat: { pattern: "*/1 * * * *" } });
+  emailQueue.add("fetchEmails", {}, { repeat: { pattern: "*/5 * * * *" } });
 };
 
 const worker = new Worker(

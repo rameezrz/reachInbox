@@ -6,11 +6,7 @@ import {
 } from "../services/googleService";
 import { errorHandler } from "../utils/errorHandler";
 import { findUser } from "../db";
-import {
-  fetchAndProcessEmails,
-  registerUser,
-  updateTokensForUser,
-} from "../utils/googleAuthHelper";
+import { registerUser, updateTokensForUser } from "../utils/googleAuthHelper";
 import { oAuth2Client } from "../config/googleClient";
 import { google } from "googleapis";
 import { createLabelsIfNotExist } from "../services/gmailService";

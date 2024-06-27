@@ -12,7 +12,7 @@ app.use("/api", router);
 
 const PORT = ENV.PORT || 3001;
 const startServer = async () => {
-  await scheduleEmailFetching();
+  // await scheduleEmailFetching();
 
   app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
