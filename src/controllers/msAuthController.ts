@@ -26,7 +26,6 @@ export const msAuthCallback = async (req: Request, res: Response) => {
     const code = req.query.code as string;
     const tokens = await getMSAccessToken(code);
     const email = await getMSUserEmail(tokens?.accessToken || "");
-    console.log({ email });
     let user = await findUser(email || "");
     if (!user) {
       user = await register(
@@ -42,9 +41,7 @@ export const msAuthCallback = async (req: Request, res: Response) => {
         tokens?.refreshToken
       );
     }
-    console.log("registration completed");
     const emails = await fetchOutlookEmails(tokens?.accessToken);
-    console.log("after fetch");
     for (const email of emails) {
       const response = await analyzeEmailContent(
         email.subject,
@@ -52,7 +49,6 @@ export const msAuthCallback = async (req: Request, res: Response) => {
         email.msgBody
       );
       email.category = response;
-      console.log(`Msg Analyzed....`);
       const sentResponse = await sendOutlookEmail(tokens?.accessToken, email);
       console.log(sentResponse);
       console.log(`Msg sent....`);

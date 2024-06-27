@@ -8,17 +8,15 @@ export const fetchExistingFolders = async (
   client: Client,
   userId: string
 ): Promise<FolderMap> => {
-  console.log("inside fetchExistingFolders");
   const folderMap: FolderMap = {};
   try {
     const response = await client.api(`/users/${userId}/mailFolders`).get();
-    console.log(response, "fetch response");
-    // const folders: { value: Array<{ displayName: string; id: string }> } =
-    //   response;
+    const folders: { value: Array<{ displayName: string; id: string }> } =
+      response;
 
-    // folders.value.forEach((folder) => {
-    //   folderMap[folder.displayName] = folder.id;
-    // });
+    folders.value.forEach((folder) => {
+      folderMap[folder.displayName] = folder.id;
+    });
   } catch (error) {
     console.error("Error fetching folders:", error);
   }

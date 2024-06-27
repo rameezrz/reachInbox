@@ -21,7 +21,6 @@ export const fetchOutlookEmails = async (accessToken: string) => {
       const fromName = message.from?.emailAddress?.name || "";
       const toEmail = message.toRecipients?.[0]?.emailAddress?.address || "";
       const plainTextMsgBody = stripHtmlTags(message.body?.content || "");
-      console.log(`Msg fetched....`);
       return {
         id: message.id || "",
         threadId: message.conversationId || "",
