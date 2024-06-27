@@ -32,7 +32,7 @@ const analyzeAndModifyEmail = async (gmail: any, message: any) => {
     message.msgBody
   );
 
-  switch (response?.toLowerCase()) {
+  switch (response?.split(" ")[0].toLowerCase()) {
     case "a.":
       await modifyMessageLabels(gmail, message.id, ["Interested"]);
       break;
@@ -46,7 +46,11 @@ const analyzeAndModifyEmail = async (gmail: any, message: any) => {
       console.log("Default category");
   }
 
-  console.log(`Mail [${message.id}] analyzed with category: ${response}`);
+  console.log(
+    `User : [${message.toEmail}] - Mail : [${
+      message.id
+    }] analyzed with category: ${response} | ${new Date().toLocaleTimeString()}`
+  );
   return response;
 };
 

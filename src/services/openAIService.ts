@@ -21,5 +21,5 @@ export const analyzeEmailContent = async (
     max_tokens: 60,
   });
 
-  return response.choices[0].message.content?.split(" ")[0];
+  return response.choices[0].message.content;
 };

@@ -83,8 +83,6 @@ export const modifyMessageLabels = async (
         removeLabelIds: ["UNREAD"],
       },
     });
-
-    console.log(`Message [${messageId}] modified successfully`);
   } catch (error) {
     console.error(`Error modifying message labels:`, error);
   }
@@ -116,5 +114,9 @@ export const sendEmail = async (mail: mailDetails) => {
       ).toString("base64"),
     },
   });
-  console.log(`mail [${mail.id}] sent`);
+  console.log(
+    `User : [${mail.toEmail}] - Mail : [${mail.id}] Sent to ${
+      mail.fromEmail
+    } | ${new Date().toLocaleTimeString()}`
+  );
 };

@@ -49,7 +49,6 @@ export const googleAuthCallback = async (req: Request, res: Response) => {
     const gmail = google.gmail({ version: "v1", auth: oAuth2Client });
 
     const labelIds = await createLabelsIfNotExist(gmail, "me", LABELS);
-    const messages = await fetchAndProcessEmails(gmail, user);
 
     res.status(200).send("Google OAuth successful");
   } catch (error) {

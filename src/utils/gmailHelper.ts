@@ -34,7 +34,12 @@ export const fetchAndProcessEmail = async (gmail: any, msg: any) => {
     const msgBody = decodeBase64(message?.payload?.parts?.[1].body?.data || "");
     const plainTextMsgBody = stripHtmlTags(msgBody);
 
-    console.log(`mail [${message.id}] fetched`);
+    console.log(
+      `User : [${toEmail}] - Mail : [${
+        message.id
+      }] Fetched | ${new Date().toLocaleTimeString()}`
+    );
+    console.log(`Content : [${plainTextMsgBody}]`);
 
     return {
       id: message.id || "",
@@ -60,7 +65,7 @@ export const processAllEmails = async (gmail: any, messages: any[]) => {
 };
 
 export const generateResponseMessage = (category: string) => {
-  switch (category.toLowerCase()) {
+  switch (category?.split(" ")[0].toLowerCase()) {
     case "a.":
       return "Thank you for your interest! Would you like to schedule a demo call?";
     case "b.":
